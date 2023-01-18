@@ -1,0 +1,26 @@
+function initMap(): void {
+  // The location of Brock
+  const Brock = { lat: 43.117636425668266, lng: -79.24771235783334 };
+  // The map, centered at Brock
+  const map = new google.maps.Map(
+    document.getElementById("map") as HTMLElement,
+    {
+      zoom: 8,
+      center: Brock,
+    }
+  );
+
+  // The marker, positioned at Brock
+  const marker = new google.maps.Marker({
+    position: Brock,
+    map: map,
+  });
+}
+
+declare global {
+  interface Window {
+    initMap: () => void;
+  }
+}
+window.initMap = initMap;
+export {};
