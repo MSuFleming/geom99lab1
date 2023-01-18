@@ -7,9 +7,8 @@ Be creative and use multiple parameters from the API documentation to earn a top
 > Tip: Can't make changes? GitHub previews MD documents by default (read-only). Start editing to make the changes for your URL and JSON response below
 
 ## Directions URL
-
 ```
-https://maps.googleapis.com/maps/api/directions/json?language=en&departure_time=2023011712&origin=place_id%3AChIJq6p6ZumM1YkRwlenRs5y5SY&destination=place_id%3AChIJDcIzdI571YkRdHStExr94S4&waypoints=place_id%3AChIJMa1rT1t51YkRvWiqKyKPT8Q%7Cplace_id%3AChIJFQkGDlx51YkRbmtT8T_fJPY&avoid=tolls|ferries&units=metric&key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE
+https://maps.googleapis.com/maps/api/directions/json?region=ca&language=en&origin=place_id%3AChIJq6p6ZumM1YkRwlenRs5y5SY&destination=place_id%3AChIJDcIzdI571YkRdHStExr94S4&waypoints=place_id%3AChIJMa1rT1t51YkRvWiqKyKPT8Q%7Cplace_id%3AChIJFQkGDlx51YkRbmtT8T_fJPY%7Cvia%3Aplace_id%3AChIJCyPXRVx51YkRn4ERARYVEDo&avoid=tolls|ferries&units=metric&key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE
 ```
 
 ## Next paste the full JSON response to this query here:
@@ -34,6 +33,11 @@ https://maps.googleapis.com/maps/api/directions/json?language=en&departure_time=
       },
       {
          "geocoder_status" : "OK",
+         "place_id" : "ChIJCyPXRVx51YkRn4ERARYVEDo",
+         "types" : [ "establishment", "point_of_interest", "police" ]
+      },
+      {
+         "geocoder_status" : "OK",
          "place_id" : "ChIJDcIzdI571YkRdHStExr94S4",
          "types" : [ "airport", "establishment", "point_of_interest" ]
       }
@@ -47,7 +51,7 @@ https://maps.googleapis.com/maps/api/directions/json?language=en&departure_time=
             },
             "southwest" : {
                "lat" : 44.3410364,
-               "lng" : -78.77573649999999
+               "lng" : -78.77573769999999
             }
          },
          "copyrights" : "Map data ©2023 Google",
@@ -268,12 +272,12 @@ https://maps.googleapis.com/maps/api/directions/json?language=en&departure_time=
             },
             {
                "distance" : {
-                  "text" : "4.1 km",
-                  "value" : 4143
+                  "text" : "4.3 km",
+                  "value" : 4297
                },
                "duration" : {
                   "text" : "7 mins",
-                  "value" : 406
+                  "value" : 412
                },
                "end_address" : "Kawartha Lakes Municipal Airport (CNF4), 3187 ON-35, Lindsay, ON K9V 4R1, Canada",
                "end_location" : {
@@ -288,20 +292,20 @@ https://maps.googleapis.com/maps/api/directions/json?language=en&departure_time=
                "steps" : [
                   {
                      "distance" : {
-                        "text" : "2.2 km",
-                        "value" : 2207
+                        "text" : "35 m",
+                        "value" : 35
                      },
                      "duration" : {
-                        "text" : "4 mins",
-                        "value" : 269
+                        "text" : "1 min",
+                        "value" : 6
                      },
                      "end_location" : {
-                        "lat" : 44.3487975,
-                        "lng" : -78.7669976
+                        "lat" : 44.3541428,
+                        "lng" : -78.7408483
                      },
                      "html_instructions" : "Head \u003cb\u003ewest\u003c/b\u003e on \u003cb\u003eKent St W\u003c/b\u003e toward \u003cb\u003eVictoria Ave N\u003c/b\u003e",
                      "polyline" : {
-                        "points" : "_}umGt~q_NRrADZ`@lCb@nC`@lChA|Hh@rD`A|Gl@~DrAfIRfBPlA@LDf@Dz@?n@A`BCpATfBHn@P`Bh@lDLz@Hb@D\\ZnBNpAD^VfBT~AVnBXpBXrBF\\b@pCd@pCVhBHf@VhBRlAb@bEVvBXnBJv@N|@@JD`@@JHr@@NB\\FdA@j@?bACzA"
+                        "points" : "_}umGt~q_NRrA"
                      },
                      "start_location" : {
                         "lat" : 44.3542434,
@@ -311,25 +315,73 @@ https://maps.googleapis.com/maps/api/directions/json?language=en&departure_time=
                   },
                   {
                      "distance" : {
-                        "text" : "1.9 km",
-                        "value" : 1908
+                        "text" : "0.7 km",
+                        "value" : 660
                      },
                      "duration" : {
                         "text" : "2 mins",
-                        "value" : 103
+                        "value" : 94
+                     },
+                     "end_location" : {
+                        "lat" : 44.3597945,
+                        "lng" : -78.7433937
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e at the 1st cross street onto \u003cb\u003eVictoria Ave N\u003c/b\u003e",
+                     "maneuver" : "turn-right",
+                     "polyline" : {
+                        "points" : "k|umGhar_NyBv@}Bt@oBn@gC|@oBr@cCz@iBn@KByBt@uCdA"
+                     },
+                     "start_location" : {
+                        "lat" : 44.3541428,
+                        "lng" : -78.7408483
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.3 km",
+                        "value" : 2266
+                     },
+                     "duration" : {
+                        "text" : "4 mins",
+                        "value" : 217
+                     },
+                     "end_location" : {
+                        "lat" : 44.35350649999999,
+                        "lng" : -78.77050090000002
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eColborne St W\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "u_wmGdqr_NBXdAdHl@~Dz@`GdBjLv@dF@PDXLp@l@fEl@~DPnABNPfBRrAVzAV~Aj@~DHn@f@lDT~Ap@~ET~AJn@t@nFHn@DXTvApBxNZtBp@pErBxNJn@b@bDLt@`@tC"
+                     },
+                     "start_location" : {
+                        "lat" : 44.3597945,
+                        "lng" : -78.7433937
+                     },
+                     "travel_mode" : "DRIVING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.3 km",
+                        "value" : 1308
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 61
                      },
                      "end_location" : {
                         "lat" : 44.3647103,
                         "lng" : -78.77551509999999
                      },
-                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eON-35 N\u003c/b\u003e (signs for \u003cb\u003eFenelon Falls\u003c/b\u003e)",
+                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eON-35 N\u003c/b\u003e",
                      "maneuver" : "turn-right",
                      "polyline" : {
-                        "points" : "_{tmGvdw_NI?S@SBODC@E@SFOFUJc@TCB[RYPy@r@SPy@v@]\\_@^u@z@c@d@qArAYXWT]VA?UP]Ta@TWN]N[J}Aj@_AZaBh@E@cAZ{E|Am@TsCbAWHa@NcA\\iC|@a@Na@La@N_AZaMjEIByBt@_Bh@cA^oCbAmGzB"
+                        "points" : "mxumGrzw_N_AZaBh@E@cAZ{E|Am@TsCbAWHa@NcA\\iC|@a@Na@La@N_AZaMjEIByBt@_Bh@cA^oCbAmGzB"
                      },
                      "start_location" : {
-                        "lat" : 44.3487975,
-                        "lng" : -78.7669976
+                        "lat" : 44.35350649999999,
+                        "lng" : -78.77050090000002
                      },
                      "travel_mode" : "DRIVING"
                   },
@@ -359,15 +411,24 @@ https://maps.googleapis.com/maps/api/directions/json?language=en&departure_time=
                   }
                ],
                "traffic_speed_entry" : [],
-               "via_waypoint" : []
+               "via_waypoint" : [
+                  {
+                     "location" : {
+                        "lat" : 44.3551156,
+                        "lng" : -78.7412851
+                     },
+                     "step_index" : 1,
+                     "step_interpolation" : 0.1720777906454205
+                  }
+               ]
             }
          ],
          "overview_polyline" : {
-            "points" : "ojsmGjfr_Nk@pA_@WDYGk@i@mDKc@[s@QWsAc@a@Ic@BmC~@gIxCyMrEoExAcCyQi@yD{@yG_BoMiF~AwFlBqFdB_GrBu@Vt@WbBnMt@zEXnBdA|GvE|[`CfOd@tDFt@DjBErD^vCz@nGV~Ap@~EjAvIr@dFj@nD~AlKRlAb@bEp@fFb@bDPlBHpBC~C]@c@Hm@Ry@`@_@VsAdAmAhAwC~CkBlBu@l@wA|@u@^yBv@kFbBiGrBkDlAqGzBeQdGgHbC}K~DPj@LE"
+            "points" : "ojsmGjfr_Nk@pA_@WDYGk@i@mDKc@[s@QWsAc@a@Ic@BmC~@gIxCyMrEoExAcCyQi@yD{@yG_BoMiF~AwFlBqFdB_GrBu@Vt@WbBnMt@zERrAyBv@mFdBeN|EeCx@uCdABXrBdN`DlTlAbIpBfNPfBRrAn@zDrB|N`Hzf@lEpZp@xE`@tC_AZgBj@_HxB{FrB_YtJyE~AsEbBmGzBNf@BBJE"
          },
          "summary" : "Albert St S, Durham St W and William St S",
          "warnings" : [],
-         "waypoint_order" : [ 0, 1 ]
+         "waypoint_order" : []
       }
    ],
    "status" : "OK"
