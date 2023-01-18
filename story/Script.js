@@ -1,6 +1,9 @@
+// This example creates a 2-pixel-wide red polyline showing the path of
+// the first trans-Pacific flight between Oakland, CA, and Brisbane,
+// Australia which was made by Charles Kingsford Smith.
 function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 2,
+    zoom: 3,
     center: { lat: 0, lng: -180 },
     mapTypeId: "terrain",
   });
