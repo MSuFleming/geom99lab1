@@ -1,29 +1,131 @@
-function initMap() {
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 13,
-    center: { lat: 43.128333, lng: -79.229116  },
-    mapTypeId: "terrain",
-  });
-  const flightPlanCoordinates = [
-    { lat: 43.118919342285636, lng: -79.24559176045685 },
-    { lat: 43.123869, lng: -79.243317 },
-    { lat: 43.127565, lng: -79.238704 },
-    { lat: 43.134447, lng: -79.238972 },
-    { lat: 43.133664, lng: -79.232320 },
-    { lat: 43.132098, lng: -79.227728 },
-    { lat: 43.133245, lng: -79.224518},
-    { lat: 43.13781773237814, lng: -79.22279112311823},
-  ];
-  const flightPath = new google.maps.Polyline({
-    path: flightPlanCoordinates,
-    geodesic: true,
-    strokeColor: "#FF0000",
-    strokeOpacity: 1.0,
-    strokeWeight: 2,
-  });
+function initMap(): void {
+  const markerArray: google.maps.Marker[] = [];
 
-  flightPath.setMap(map);
+  // Instantiate a directions service.
+  const directionsService = new google.maps.DirectionsService();
+
+  // Create a map and center it on Manhattan.
+  const map = new google.maps.Map(
+    document.getElementById("map") as HTMLElement,
+    {
+      zoom: 10,
+      center: {lat: 43.138260, lng:  -79.242293},
+    }
+  );
+
+  // Create a renderer for directions and bind it to the map.
+  const directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
+
+  // Instantiate an info window to hold step text.
+  const stepDisplay = new google.maps.InfoWindow();
+
+  // Display the route between the initial start and end selections.
+  calculateAndDisplayRoute(
+    directionsRenderer,
+    directionsService,
+    markerArray,
+    stepDisplay,
+    map
+  );
+
+  // Listen to change events from the start and end lists.
+  const onChangeHandler = function () {
+    calculateAndDisplayRoute(
+      directionsRenderer,
+      directionsService,
+      markerArray,
+      stepDisplay,
+      map
+    );
+  };
+
+  (document.getElementById("start") as HTMLElement).addEventListener(
+    "change",
+    onChangeHandler
+  );
+  (document.getElementById("end") as HTMLElement).addEventListener(
+    "change",
+    onChangeHandler
+  );
 }
 
-window.initMap = initMap;
+function calculateAndDisplayRoute(
+  directionsRenderer: google.maps.DirectionsRenderer,
+  directionsService: google.maps.DirectionsService,
+  markerArray: google.maps.Marker[],
+  stepDisplay: google.maps.InfoWindow,
+  map: google.maps.Map
+) {
+  // First, remove any existing markers from the map.
+  for (let i = 0; i < markerArray.length; i++) {
+    markerArray[i].setMap(null);
+  }
 
+  // Retrieve the start and end locations and create a DirectionsRequest using
+  // WALKING directions.
+  directionsService
+    .route({
+      origin: (document.getElementById("start") as HTMLInputElement).value,
+      destination: (document.getElementById("end") as HTMLInputElement).value,
+      travelMode: google.maps.TravelMode.WALKING,
+    })
+    .then((result: google.maps.DirectionsResult) => {
+      // Route the directions and pass the response to a function to create
+      // markers for each step.
+      (document.getElementById("warnings-panel") as HTMLElement).innerHTML =
+        "<b>" + result.routes[0].warnings + "</b>";
+      directionsRenderer.setDirections(result);
+      showSteps(result, markerArray, stepDisplay, map);
+    })
+    .catch((e) => {
+      window.alert("Directions request failed due to " + e);
+    });
+}
+
+function showSteps(
+  directionResult: google.maps.DirectionsResult,
+  markerArray: google.maps.Marker[],
+  stepDisplay: google.maps.InfoWindow,
+  map: google.maps.Map
+) {
+  // For each step, place a marker, and add the text to the marker's infowindow.
+  // Also attach the marker to an array so we can keep track of it and remove it
+  // when calculating new routes.
+  const myRoute = directionResult!.routes[0]!.legs[0]!;
+
+  for (let i = 0; i < myRoute.steps.length; i++) {
+    const marker = (markerArray[i] =
+      markerArray[i] || new google.maps.Marker());
+
+    marker.setMap(map);
+    marker.setPosition(myRoute.steps[i].start_location);
+    attachInstructionText(
+      stepDisplay,
+      marker,
+      myRoute.steps[i].instructions,
+      map
+    );
+  }
+}
+
+function attachInstructionText(
+  stepDisplay: google.maps.InfoWindow,
+  marker: google.maps.Marker,
+  text: string,
+  map: google.maps.Map
+) {
+  google.maps.event.addListener(marker, "click", () => {
+    // Open an info window when the marker is clicked on, containing the text
+    // of the step.
+    stepDisplay.setContent(text);
+    stepDisplay.open(map, marker);
+  });
+}
+
+declare global {
+  interface Window {
+    initMap: () => void;
+  }
+}
+window.initMap = initMap;
+export {};
