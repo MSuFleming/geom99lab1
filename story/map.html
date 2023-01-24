@@ -5,64 +5,10 @@
  SPDX-License-Identifier: Apache-2.0
 -->
 <html>
-
-
-  <head>
-    <title>Simple Map</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-
-
-    <script type="module" src="./script.js"></script>
-  </head>
-  <body>
-    <div id="map"></div>
-
-    <!-- 
-      The `defer` attribute causes the callback to execute after the full HTML
-      document has been parsed. For non-blocking uses, avoiding race conditions,
-      and consistent behavior across browsers, consider loading using Promises
-      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
-      -->
-
-      <style>body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-  height: 100%;
-}
-
-/* 
- * Optional: Makes the sample page fill the window. 
- */
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-      </style>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE&callback=initMap&v=weekly"
-      defer
-    ></script>
-  </body>
-</html>
-
-
-
-<html>
   <head>
     <title>Shopping Routes After Class</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <!-- playground-hide -->
-    <script>
-      const process = { env: {} };
-      process.env.GOOGLE_MAPS_API_KEY =
-        "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg";
-    </script>
+
+
     <!-- playground-hide-end -->
     <script type="module" src="./script.js"></script>
   </head>
