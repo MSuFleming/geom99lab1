@@ -121,7 +121,6 @@ function attachInstructionText(
     stepDisplay.open(map, marker);
   });
 }
-
 declare global {
   interface Window {
     initMap: () => void;
