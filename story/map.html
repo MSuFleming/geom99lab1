@@ -11,28 +11,8 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <!-- playground-hide-end -->
-    <script type="module" src="./script.js</script>
-  </head>
-  <body>
-    <div id="floating-panel">
-      <b>Start: </b>
-      <select id="start">
-        <option value="1812 Sir Isaac Brock Way, St. Catharines, ON">Brock University</option>
-        <option value="15 Artists' Common, St. Catharines, ON">Brock Arts Campus</option>
-      </select>
-      <b>End: </b>
-      <select id="end">
-        <option value="420 Vansickle Rd, St. Catharines, ON">Walmart</option>
-        <option value="221 Glendale Ave, St. Catharines, ON">Zerhs</option>
-        <option value="343 Glendale Ave, St. Catharines, ON">Sobyes</option>
-        <option value="Pendale Plaza, 210 Glendale Ave, St. Catharines, ON">Dollarama</option>
-        <option value="318 Ontario St, St. Catharines, ON L2R 5L8">FreshCo</option>
-      </select>
-    </div>
-    <div id="map"></div>
-    &nbsp;
-    <div id="warnings-panel"></div>
-    <style>body {
+        <script type="module" src="./script.js"></script>
+      <style>body {
         height: 100%;
         margin: 0;
         padding: 0;
@@ -52,7 +32,26 @@ body {
 }
 
       </style>
-
+  </head>
+  <body>
+    <div id="floating-panel">
+      <b>Start: </b>
+      <select id="start">
+        <option value="1812 Sir Isaac Brock Way, St. Catharines, ON">Brock University</option>
+        <option value="15 Artists' Common, St. Catharines, ON">Brock Arts Campus</option>
+      </select>
+      <b>End: </b>
+      <select id="end">
+        <option value="420 Vansickle Rd, St. Catharines, ON">Walmart</option>
+        <option value="221 Glendale Ave, St. Catharines, ON">Zerhs</option>
+        <option value="343 Glendale Ave, St. Catharines, ON">Sobyes</option>
+        <option value="Pendale Plaza, 210 Glendale Ave, St. Catharines, ON">Dollarama</option>
+        <option value="318 Ontario St, St. Catharines, ON L2R 5L8">FreshCo</option>
+      </select>
+    </div>
+    <div id="map"></div>
+    &nbsp;
+    <div id="warnings-panel"></div>  
     <!-- 
       The `defer` attribute causes the callback to execute after the full HTML
       document has been parsed. For non-blocking uses, avoiding race conditions,
