@@ -1,106 +1,117 @@
-/**
- * @license
- * Copyright 2019 Google LLC. All Rights Reserved.
- * SPDX-License-Identifier: Apache-2.0
- * References: Google Maps Markers & Directions https://developers.google.com/maps/documentation/javascript/markers & W3School
- */
-// [START maps_directions_complex]
-function initMap() {
-    var markerArray = [];
-    // Instantiate a directions service.
-    var directionsService = new google.maps.DirectionsService();
-    // Create a map and center it on Manhattan.
-    var map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 10,
-        center: { lat: 43.136668, lng: -79.237701 },
-        mapTypeId: 'hybrid'
-    });
+<!DOCTYPE html>
+<!--
+ @license
+ Copyright 2019 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html>
 
-    const image =
-    "http://maps.google.com/mapfiles/kml/shapes/grocery.png";
-  var groceryMarker = new google.maps.Marker({
-    position: { lat: 43.13406401904463, lng: -79.2255863100338},
-    map,
-    icon: image,
-  });
-    var groceryMarker = new google.maps.Marker({
-    position: { lat: 43.13170339993443, lng:  -79.22568018731423},
-    map,
-    icon: image,
-    });
-    var groceryMarker = new google.maps.Marker({
-        position: { lat: 43.151444748000074, lng: -79.26798521911768},
-        map,
-        icon: image,
-        });
-        var groceryMarker = new google.maps.Marker({
-            position: { lat: 43.137747779136774, lng:  -79.21618005560006},
-            map,
-            icon: image,
-            });
-            var groceryMarker = new google.maps.Marker({
-                position: { lat: 43.17005753972223, lng:  -79.2633206760971},
-                map,
-                icon: image,
-                });
-    // Create a renderer for directions and bind it to the map.
-    var directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
-    // Instantiate an info window to hold step text.
-    var stepDisplay = new google.maps.InfoWindow();
-    // Display the route between the initial start and end selections.
-    calculateAndDisplayRoute(directionsRenderer, directionsService, markerArray, stepDisplay, map);
-    // Listen to change events from the start and end lists.
-    var onChangeHandler = function () {
-        calculateAndDisplayRoute(directionsRenderer, directionsService, markerArray, stepDisplay, map);
-    };
-    document.getElementById("start").addEventListener("change", onChangeHandler);
-    document.getElementById("end").addEventListener("change", onChangeHandler);
+<head>
+    <title>Shopping Routes After Class</title>
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+    <!-- playground-hide-end -->
+    <script type="module" src="./script.js"></script>
+      <style>
+        /* font style learned from w3school*/
+      @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;}
+
+/* 
+ * Optional: Makes the sample page fill the window. 
+ */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
-function calculateAndDisplayRoute(directionsRenderer, directionsService, markerArray, stepDisplay, map) {
-    // First, remove any existing markers from the map.
-    for (var i = 0; i < markerArray.length; i++) {
-        markerArray[i].setMap(null);
-    }
-    // Retrieve the start and end locations and create a DirectionsRequest using
-    // WALKING directions.
-    directionsService
-        .route({
-        origin: document.getElementById("start").value,
-        destination: document.getElementById("end").value,
-        travelMode: google.maps.TravelMode.WALKING,
-    })
-        .then(function (result) {
-        // Route the directions and pass the response to a function to create
-        // markers for each step.
-        document.getElementById("warnings-panel").innerHTML =
-            "<b>" + result.routes[0].warnings + "</b>";
-        directionsRenderer.setDirections(result);
-        showSteps(result, markerArray, stepDisplay, map);
-    })
-        .catch(function (e) {
-        window.alert("Directions request failed due to " + e);
-    });
+.content {
+    position: relative;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
 }
-function showSteps(directionResult, markerArray, stepDisplay, map) {
-    // For each step, place a marker, and add the text to the marker's infowindow.
-    // Also attach the marker to an array so we can keep track of it and remove it
-    // when calculating new routes.
-    var myRoute = directionResult.routes[0].legs[0];
-    for (var i = 0; i < myRoute.steps.length; i++) {
-        var marker = (markerArray[i] =
-            markerArray[i] || new google.maps.Marker());
-        marker.setMap(map);
-        marker.setPosition(myRoute.steps[i].start_location);
-        attachInstructionText(stepDisplay, marker, myRoute.steps[i].instructions, map);
-    }
+.content .text {
+    position: relative;
+    max-width: 600px;
 }
-function attachInstructionText(stepDisplay, marker, text, map) {
-    google.maps.event.addListener(marker, "click", function () {
-        // Open an info window when the marker is clicked on, containing the text
-        // of the step.
-        stepDisplay.setContent(text);
-        stepDisplay.open(map, marker);
-    });
+.content .text h1 {
+    font-family: 'Open Sans', sans-serif;;
+    text-transform: uppercase;
+    line-height: 1.2em;
+    letter-spacing: .1em;
+    font-size: 40px;
+    margin-left: 6px;
+    color: rgb(19, 18, 18);
 }
-window.initMap = initMap;
-// [END maps_directions_complex]
+
+.content .text h2 {
+    font-family: 'Open Sans', sans-serif;;
+    text-transform: uppercase;
+    line-height: 1em;
+    font-size: 30px;
+    margin-left: 6px;
+    color: rgb(0, 0, 0);
+}
+
+.content .text p {
+    font-family: 'Open Sans', sans-serif;;
+    font-size: 14px;
+    margin-top: 20px;
+    margin-left: 6px;
+    color: #000000;
+ }
+  </style>
+</head>
+  <body>
+    <div class="content">
+      <div class="text">
+      <h1>Grocery Stores Around the Campus</h1> 
+      <h2>Brock University</h2>
+      <p>This Map shows several grocery stores near the Brock University. it also provides driving directions from the campus to the desried supermarket.</p>
+     </div>
+  <div class="pepsi">
+  <img src="images/pepsi.png" alt="">
+  </div>
+ </div>
+    <div id="floating-panel">
+      <p>Start: </p>
+      <select id="start">
+        <option value="1812 Sir Isaac Brock Way, St. Catharines, ON">Brock University</option>
+        <option value="15 Artists' Common, St. Catharines, ON">Brock Arts Campus</option>
+      </select>
+      <p>Destination: </p>
+      <select id="end">
+        <option value="420 Vansickle Rd, St. Catharines, ON">Walmart</option>
+        <option value="221 Glendale Ave, St. Catharines, ON">Zerhs</option>
+        <option value="343 Glendale Ave, St. Catharines, ON">Sobyes</option>
+        <option value="Pendale Plaza, 210 Glendale Ave, St. Catharines, ON">Dollarama</option>
+        <option value="318 Ontario St, St. Catharines, ON L2R 5L8">FreshCo</option>
+      </select>
+    </div>
+    <div id="map"></div>
+    &nbsp;
+    <div id="warnings-panel"></div>
+
+
+    <!-- 
+      The `defer` attribute causes the callback to execute after the full HTML
+      document has been parsed. For non-blocking uses, avoiding race conditions,
+      and consistent behavior across browsers, consider loading using Promises
+      with https://www.npmjs.com/package/@googlemaps/js-api-loader.
+      -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE&callback=initMap&v=weekly"
+      defer
+    ></script>
+  </body>
+</html>
