@@ -2,6 +2,7 @@
  * @license
  * Copyright 2019 Google LLC. All Rights Reserved.
  * SPDX-License-Identifier: Apache-2.0
+ * References: Google Maps Markers & Directions https://developers.google.com/maps/documentation/javascript/markers & W3School
  */
 // [START maps_directions_complex]
 function initMap() {
@@ -11,8 +12,37 @@ function initMap() {
     // Create a map and center it on Manhattan.
     var map = new google.maps.Map(document.getElementById("map"), {
         zoom: 10,
-        center: { lat: 43.138260, lng: -79.242293 },
+        center: { lat: 43.136668, lng: -79.237701 },
+        mapTypeId: 'hybrid'
     });
+
+    const image =
+    "http://maps.google.com/mapfiles/kml/shapes/grocery.png";
+  var groceryMarker = new google.maps.Marker({
+    position: { lat: 43.13406401904463, lng: -79.2255863100338},
+    map,
+    icon: image,
+  });
+    var groceryMarker = new google.maps.Marker({
+    position: { lat: 43.13170339993443, lng:  -79.22568018731423},
+    map,
+    icon: image,
+    });
+    var groceryMarker = new google.maps.Marker({
+        position: { lat: 43.151444748000074, lng: -79.26798521911768},
+        map,
+        icon: image,
+        });
+        var groceryMarker = new google.maps.Marker({
+            position: { lat: 43.137747779136774, lng:  -79.21618005560006},
+            map,
+            icon: image,
+            });
+            var groceryMarker = new google.maps.Marker({
+                position: { lat: 43.17005753972223, lng:  -79.2633206760971},
+                map,
+                icon: image,
+                });
     // Create a renderer for directions and bind it to the map.
     var directionsRenderer = new google.maps.DirectionsRenderer({ map: map });
     // Instantiate an info window to hold step text.
@@ -32,12 +62,12 @@ function calculateAndDisplayRoute(directionsRenderer, directionsService, markerA
         markerArray[i].setMap(null);
     }
     // Retrieve the start and end locations and create a DirectionsRequest using
-    // WALKING directions.
+    // Driving directions.
     directionsService
         .route({
         origin: document.getElementById("start").value,
         destination: document.getElementById("end").value,
-        travelMode: google.maps.TravelMode.WALKING,
+        travelMode: google.maps.TravelMode.DRIVING,
     })
         .then(function (result) {
         // Route the directions and pass the response to a function to create
